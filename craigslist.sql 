@@ -1,0 +1,44 @@
+DROP DATABASE IF EXIST craigslist; 
+
+CREATE DATABASE craigslist; 
+
+ \c craigslist; 
+
+
+
+--create the region 
+ CREATE TABLE region (
+    id SERIAL PRIMARY KEY, 
+    region_name VARCHAR(255) NOT NULL
+ );
+
+ --create the user
+ CREATE TABLE user ( 
+    id SERIAL PRIMARY KEY, 
+    name VARCHAR(255)
+ );
+
+
+ --category or subject of the post 
+ CREATE TABLE categories ( 
+    id SERIAL PRIMARY KEY, 
+    name VACHAR(255) NOT NULL
+ );
+ 
+
+ --post 
+ CREATE TABLE post ( 
+    id SERIAL PRIMARY KEY, 
+    title TEXT NOT NULL,
+    text TEXT, 
+    region_id INT NOT NULL, 
+    user_id INT NOT NULL,
+    categories_id INT NOT NULL,  
+    FOREIGN KEY (region_id) REFERENCES region(id), 
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (categories_id) REFERENCES categories(id)
+ ); 
+
+
+
+
